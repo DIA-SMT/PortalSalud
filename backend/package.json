@@ -1,0 +1,33 @@
+{
+  "name": "portal-salud-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "API del Portal Integral de Salud del Empleado",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "env:dev": "node scripts/crearEnvDev.js",
+    "db:migrar": "node scripts/migrar.js",
+    "db:seed": "node scripts/seed.js",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.2.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "express-validator": "^7.2.0",
+    "helmet": "^8.0.0",
+    "knex": "^3.3.0",
+    "multer": "^2.5.0",
+    "mysql2": "^3.11.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "supertest": "^7.0.0",
+    "vitest": "^2.1.5"
+  }
+}

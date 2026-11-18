@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+*.env
+.env.*
+!.env.example
+*.log
+
+# Bases locales de desarrollo y documentos subidos
+backend/datos/
+
+# Repos de referencia (solo lectura, tienen su propio git)
+_referencia/

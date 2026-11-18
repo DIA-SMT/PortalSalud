@@ -1,0 +1,19 @@
+{
+  "name": "portal-salud",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Portal Integral de Salud del Empleado — Municipalidad de San Miguel de Tucumán",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:back": "npm run dev -w backend",
+    "dev:front": "npm run dev -w frontend",
+    "db:migrar": "npm run db:migrar -w backend",
+    "db:seed": "npm run db:seed -w backend",
+    "lint": "npm run lint -w backend && npm run lint -w frontend",
+    "test": "npm test -w backend && npm test -w frontend",
+    "build": "npm run build -w frontend"
+  }
+}
