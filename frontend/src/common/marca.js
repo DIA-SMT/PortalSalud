@@ -6,7 +6,8 @@ import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneR
 import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
-import { esRevisor, veePadron } from "../helpers/roles";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import { esRevisor, gestionaAgenda, veePadron } from "../helpers/roles";
 
 // Datos de marca del Portal de Salud. En el header se ve: [isotipo] SALUD
 //                                                                   Empleado
@@ -25,6 +26,12 @@ export const ITEMS_MENU = [
   { ruta: "/salud/recordatorios", texto: "Recordatorios", icono: createElement(NotificationsNoneRoundedIcon) },
   { ruta: "/salud/documentos", texto: "Historial y documentos", icono: createElement(FolderOpenOutlinedIcon) },
   // Personal autorizado (el backend valida el permiso y el ámbito).
+  {
+    ruta: "/salud/gestion/agenda",
+    texto: "Agenda de controles",
+    icono: createElement(CalendarMonthOutlinedIcon),
+    visible: (sesion) => gestionaAgenda(sesion?.roles),
+  },
   {
     ruta: "/salud/gestion/correcciones",
     texto: "Correcciones de fichas",

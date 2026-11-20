@@ -11,6 +11,7 @@ import Recordatorios from "./pages/Salud/Recordatorios";
 import HistorialDocumentos from "./pages/Salud/HistorialDocumentos";
 import Correcciones from "./pages/Gestion/Correcciones";
 import Padron from "./pages/Gestion/Padron";
+import Agenda from "./pages/Gestion/Agenda";
 import SinSesion from "./pages/Ingreso/SinSesion";
 import useSaludStore from "./Zustand/useSaludStore";
 
@@ -50,6 +51,7 @@ const Contenido = () => {
       <Route path="/salud/documentos" element={<HistorialDocumentos />} />
       <Route path="/salud/gestion/correcciones" element={<Correcciones />} />
       <Route path="/salud/gestion/padron" element={<Padron />} />
+      <Route path="/salud/gestion/agenda" element={<Agenda />} />
       <Route path="*" element={<Navigate to="/salud" replace />} />
     </Routes>
   );

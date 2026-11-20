@@ -5,6 +5,7 @@ const { requiereSesion } = require("../middlewares/sesion");
 const { registrarAuditoria } = require("../servicios/auditoria");
 const { crearServicioCorrecciones } = require("../servicios/correcciones");
 const { crearPadronRoutes } = require("./padronRoutes");
+const { crearAgendaRoutes } = require("./agendaRoutes");
 
 const manejar = (fn) => async (req, res, next) => {
   try {
@@ -23,6 +24,7 @@ function crearGestionRoutes(deps) {
   router.use(requiereSesion(deps));
 
   router.use(crearPadronRoutes(deps));
+  router.use(crearAgendaRoutes(deps));
 
   // Bandeja de correcciones de los empleados sobre su ficha.
   router.get(

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Alert, Button, Skeleton } from "@mui/material";
 import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
-import { esRevisor } from "../../helpers/roles";
+import EventRepeatRoundedIcon from "@mui/icons-material/EventRepeatRounded";
+import { esRevisor, gestionaAgenda } from "../../helpers/roles";
 import EncabezadoPagina from "../../common/EncabezadoPagina";
 import axiosSalud, { mensajeDeError } from "../../config/axiosSalud";
 import useSaludStore from "../../Zustand/useSaludStore";
@@ -40,6 +41,8 @@ const MiSalud = () => {
   const pendientesRevision = useSaludStore((s) => s.pendientesRevision);
   const actualizarPendientesRevision = useSaludStore((s) => s.actualizarPendientesRevision);
   const navigate = useNavigate();
+  const agendista = useSaludStore((s) => gestionaAgenda(s.roles));
+  const [pedidosPendientes, setPedidosPendientes] = useState(0);
   const [resumen, setResumen] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
@@ -64,6 +67,15 @@ const MiSalud = () => {
     if (revisor) actualizarPendientesRevision();
   }, [revisor, actualizarPendientesRevision]);
 
+  // Personal de salud: pedidos de cambio de fecha esperando respuesta.
+  useEffect(() => {
+    if (!agendista) return;
+    axiosSalud
+      .get("/gestion/agenda/pedidos/pendientes")
+      .then(({ data }) => setPedidosPendientes(data.cantidad))
+      .catch(() => setPedidosPendientes(0));
+  }, [agendista]);
+
   return (
     <main className="ps-pagina">
       <EncabezadoPagina
@@ -86,6 +98,23 @@ const MiSalud = () => {
           {pendientesRevision === 1
             ? "Hay 1 corrección de ficha para revisar."
             : `Hay ${pendientesRevision} correcciones de fichas para revisar.`}
+        </Alert>
+      )}
+
+      {agendista && pedidosPendientes > 0 && (
+        <Alert
+          severity="warning"
+          icon={<EventRepeatRoundedIcon fontSize="inherit" />}
+          sx={{ mb: 2, bgcolor: "var(--cd-amarillo-bg)", color: "var(--cd-text)" }}
+          action={
+            <Button color="inherit" size="small" onClick={() => navigate("/salud/gestion/agenda?vista=pedidos")}>
+              Ver pedidos
+            </Button>
+          }
+        >
+          {pedidosPendientes === 1
+            ? "Hay 1 pedido de cambio de fecha de un control."
+            : `Hay ${pedidosPendientes} pedidos de cambio de fecha de controles.`}
         </Alert>
       )}
 

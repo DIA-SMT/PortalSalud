@@ -660,6 +660,11 @@
   }
 }
 
+/* ---------- Agenda de controles ---------- */
+.ps-agenda__item {
+  align-items: flex-start;
+}
+
 /* ---------- Estados de pantalla completa ---------- */
 .ps-estado {
   max-width: 480px;

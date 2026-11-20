@@ -201,6 +201,17 @@ async function sembrar(dbs, cifrador, { ahora = new Date(), almacenamiento = nul
     await trx("control_medico").insert(
       control(900002, { tipo_control: "Examen de riesgo específico", fecha_programada: dias(ahora, 2), estado: "programado" })
     );
+    // Martín pidió cambiar la fecha de su audiometría: queda en la agenda del servicio de salud.
+    const idAudiometria = await insertarControl(
+      control(900002, { tipo_control: "Audiometría", fecha_programada: dias(ahora, 25), estado: "programado" })
+    );
+    await trx("solicitud_reprogramacion").insert({
+      id_control: idAudiometria,
+      id_persona: 900002,
+      motivo: "Ese día tengo licencia por vacaciones (ficticio)",
+      estado: "pendiente",
+      creado_en: new Date(ahora.getTime() - 3600000),
+    });
     await trx("riesgo_ocupacional").insert({
       id_persona: 900001, descripcion: "Tareas prolongadas frente a pantallas (ficticio)", identificado_por: 900004, fecha_identificacion: dias(ahora, -90), vigente: true, creado_en: ahora,
     });

@@ -12,6 +12,13 @@ export const desdeISO = (fechaIso) => {
   return new Date(anio, mes - 1, dia);
 };
 
+// Fecha local de hoy (o desplazada n días) en formato AAAA-MM-DD, para inputs type="date".
+export const hoyISO = (desplazamientoDias = 0) => {
+  const d = new Date();
+  d.setDate(d.getDate() + desplazamientoDias);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
+
 export const formatearFecha = (fechaIso) => {
   const fecha = desdeISO(fechaIso);
   return fecha ? FORMATO_FECHA.format(fecha) : "Sin fecha asignada";

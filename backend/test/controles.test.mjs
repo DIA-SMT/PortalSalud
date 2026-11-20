@@ -48,7 +48,7 @@ describe("Mis controles", () => {
     expect(res.status).toBe(404);
 
     const { body } = await martin.get("/api/salud/controles");
-    expect(body.controles.map((c) => c.tipo)).toEqual(["Examen de riesgo específico"]);
+    expect(body.controles.map((c) => c.tipo)).toEqual(["Examen de riesgo específico", "Audiometría"]);
   });
 
   it("valida el identificador", async () => {
